@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>灌水 - 分类 - Dengyunzhe&#39;s Site</title>
-        <link>http://example.org/categories/%E7%81%8C%E6%B0%B4/</link>
+        <link>https://dengyunzhe.github.io/categories/%E7%81%8C%E6%B0%B4/</link>
         <description>灌水 - 分类 - Dengyunzhe&#39;s Site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>dengyunzhe233@outlook.com (Dengyunzhe)</managingEditor>
-            <webMaster>dengyunzhe233@outlook.com (Dengyunzhe)</webMaster><lastBuildDate>Fri, 23 Aug 2024 19:34:20 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/%E7%81%8C%E6%B0%B4/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>dengyunzhe233@outlook.com (Dengyunzhe)</webMaster><lastBuildDate>Fri, 23 Aug 2024 19:34:20 &#43;0800</lastBuildDate><atom:link href="https://dengyunzhe.github.io/categories/%E7%81%8C%E6%B0%B4/" rel="self" type="application/rss+xml" /><item>
     <title>Hello,Hugo!</title>
-    <link>http://example.org/posts/my-first-post/</link>
+    <link>https://dengyunzhe.github.io/posts/my-first-post/</link>
     <pubDate>Fri, 23 Aug 2024 19:34:20 &#43;0800</pubDate>
     <author>Dengyunzhe</author>
-    <guid>http://example.org/posts/my-first-post/</guid>
+    <guid>https://dengyunzhe.github.io/posts/my-first-post/</guid>
     <description><![CDATA[<p>（噢耶~）我有自己的第一个<del>博客</del>（哈基米~）了，(荡树藤)(创飞路过吃香蕉的猴子)(怒吼)(变成猴子)(飞进原始森林)(荡树藤)(创飞路过吃香蕉的猴子)(怒吼)(变成猴子)(飞进原始森林)(荡树藤)(创飞路过吃香蕉的猴子)(怒吼)(变成猴子)(飞进原始森林)</p>]]></description>
 </item>
 </channel>
