@@ -1,0 +1,29 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>笔记 - 标签 - Dengyunzhe&#39;s Site</title>
+        <link>http://example.org/tags/%E7%AC%94%E8%AE%B0/</link>
+        <description>笔记 - 标签 - Dengyunzhe&#39;s Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>dengyunzhe233@outlook.com (Dengyunzhe)</managingEditor>
+            <webMaster>dengyunzhe233@outlook.com (Dengyunzhe)</webMaster><lastBuildDate>Thu, 29 Aug 2024 18:57:01 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>edge扩展开发记录</title>
+    <link>http://example.org/posts/my-forth-post/</link>
+    <pubDate>Thu, 29 Aug 2024 18:57:01 &#43;0800</pubDate>
+    <author>Dengyunzhe</author>
+    <guid>http://example.org/posts/my-forth-post/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://pic.imgdb.cn/item/66d05e40d9c307b7e919466f.png" referrerpolicy="no-referrer">
+            </div><p>本文介绍了个人制作edge浏览器扩展&quot;my new tab&quot;的过程，主要讲述edge浏览器扩展开发的基本逻辑。</p>]]></description>
+</item>
+<item>
+    <title>Git与Hugo学习笔记</title>
+    <link>http://example.org/posts/my-third-post/</link>
+    <pubDate>Sat, 24 Aug 2024 19:57:01 &#43;0800</pubDate>
+    <author>Dengyunzhe</author>
+    <guid>http://example.org/posts/my-third-post/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://pic.imgdb.cn/item/66c9cb24d9c307b7e9591480.jpg" referrerpolicy="no-referrer">
+            </div><!-- ![mywife](https://pic.imgdb.cn/item/66c9cb24d9c307b7e9591480.jpg) -->
+<p>本文介绍了个人博客的搭建过程，从安装hugo、git、go到主题下载、文章发布、github设置个人页的过程。</p>]]></description>
+</item>
+</channel>
+</rss>

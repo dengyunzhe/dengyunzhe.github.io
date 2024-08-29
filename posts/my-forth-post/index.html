@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>edge扩展开发记录 - Dengyunzhe&#39;s Site</title><meta name="Description" content="This is my cool site"><meta property="og:url" content="http://example.org/posts/my-forth-post/">
+  <meta property="og:site_name" content="Dengyunzhe&#39;s Site">
+  <meta property="og:title" content="edge扩展开发记录">
+  <meta property="og:description" content="本文介绍了个人制作edge浏览器扩展&#34;my new tab&#34;的过程，主要讲述edge浏览器扩展开发的基本逻辑。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-08-29T18:57:01+08:00">
+    <meta property="article:modified_time" content="2024-08-29T18:57:01+08:00">
+    <meta property="article:tag" content="笔记">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="edge扩展开发记录">
+  <meta name="twitter:description" content="本文介绍了个人制作edge浏览器扩展&#34;my new tab&#34;的过程，主要讲述edge浏览器扩展开发的基本逻辑。">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/my-forth-post/" /><link rel="prev" href="http://example.org/posts/my-third-post/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "edge扩展开发记录",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/my-forth-post\/"
+        },"genre": "posts","keywords": "笔记","wordcount":  2646 ,
+        "url": "http:\/\/example.org\/posts\/my-forth-post\/","datePublished": "2024-08-29T18:57:01+08:00","dateModified": "2024-08-29T18:57:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Dengyunzhe"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Dengyunzhe&#39;s Site">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="所有的文章"> 文章 </a><a class="menu-item" href="/tags/" title="不同的话题"> 标签 </a><a class="menu-item" href="/categories/" title="文章与随笔"> 专栏 </a><a class="menu-item" href="/about/" title="个人简介"> 关于 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Dengyunzhe&#39;s Site">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="所有的文章">文章</a><a class="menu-item" href="/tags/" title="不同的话题">标签</a><a class="menu-item" href="/categories/" title="文章与随笔">专栏</a><a class="menu-item" href="/about/" title="个人简介">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">edge扩展开发记录</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/dengyunzhe/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dengyunzhe</a>
+</span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%96%87%E7%AB%A0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>文章</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-29">2024-08-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2646 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://pic.imgdb.cn/item/66d05e40d9c307b7e919466f.png"
+        data-srcset="https://pic.imgdb.cn/item/66d05e40d9c307b7e919466f.png, https://pic.imgdb.cn/item/66d05e40d9c307b7e919466f.png 1.5x, https://pic.imgdb.cn/item/66d05e40d9c307b7e919466f.png 2x"
+        data-sizes="auto"
+        alt="https://pic.imgdb.cn/item/66d05e40d9c307b7e919466f.png"
+        title="https://pic.imgdb.cn/item/66d05e40d9c307b7e919466f.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1为什么要自己做一个">1、为什么要自己做一个？</a>
+      <ul>
+        <li><a href="#11-方便切换搜索引擎的搜索工具">1.1、 方便切换搜索引擎的搜索工具，</a></li>
+        <li><a href="#12-提供每日热搜的标题及对应的跳转链接">1.2、 提供每日热搜的标题及对应的跳转链接。</a></li>
+        <li><a href="#13-保护隐私">1.3、 保护隐私</a></li>
+        <li><a href="#14-定制化">1.4、 定制化</a></li>
+      </ul>
+    </li>
+    <li><a href="#2edge浏览器扩展的源码组织">2、edge浏览器扩展的源码组织</a>
+      <ul>
+        <li><a href="#21manifest文件">2.1、manifest文件</a></li>
+        <li><a href="#22html文件及对应的js脚本">2.2、html文件及对应的js脚本</a></li>
+        <li><a href="#23扩展的更新逻辑">2.3、扩展的更新逻辑</a></li>
+      </ul>
+    </li>
+    <li><a href="#3之后的发展方向">3、之后的发展方向</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>本文介绍了个人制作edge浏览器扩展&quot;my new tab&quot;的过程，主要讲述edge浏览器扩展开发的基本逻辑。</p>
+<h2 id="1为什么要自己做一个">1、为什么要自己做一个？</h2>
+<p>我的需求其实可以在市面上的一些自定义新标签页的扩展满足了，我使用这些扩展基于四个需求，</p>
+<h3 id="11-方便切换搜索引擎的搜索工具">1.1、 方便切换搜索引擎的搜索工具，</h3>
+<p>这点几乎是原生新标签页所做不到的,目前的浏览器大都只支持一种搜索引擎，切换也需要跑到设置页面进行一同修改，实为不便。</p>
+<h3 id="12-提供每日热搜的标题及对应的跳转链接">1.2、 提供每日热搜的标题及对应的跳转链接。</h3>
+<p>那么，第二点并不是想象中那样好满足，目前某新标签页内提供的b站热门其实是每日热门，而不是综合热门，每日热门是可以轻松通过买量上去的，例证就是米哈游的pv、op、ep等视频在刚发布当天就可以上每日热门，但是之后很难上到综合热门。这种信息茧房让我感到不适。</p>
+<h3 id="13-保护隐私">1.3、 保护隐私</h3>
+<p>这很好理解，用户端根本无法确知自己的搜索记录是否会被记录，当然，经过本人本次项目的开发及审核经验，本人认为新标签页有较低概率收集用户隐私。当然，如果是图标隐私的话，就不好说了，因为图标信息、壁纸是存在服务器的，所以可以实现用户信息同步。泄露图标信息倒是没啥，但是每次打开浏览器都要加载并且尝试从网站获取图标和壁纸确实对网速和后台造成了负荷，这是本人所无法接受的。</p>
+<h3 id="14-定制化">1.4、 定制化</h3>
+<p>个人认为别人做的标签页为了迎合大众多少都会加入许多我用不到的模块，这些模块同样让人生厌。而且整体的美观度也无法根据我自己的想法随便改。</p>
+<p>综上我的需求可以归结为搜索、热门、导航。</p>
+<h2 id="2edge浏览器扩展的源码组织">2、edge浏览器扩展的源码组织</h2>
+<p>edge跟chrome同源，所以扩展函数什么的也是通用的，这里展示一下一个扩展的基本结构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">- icons/
+</span></span><span class="line"><span class="cl">  - icon64.png
+</span></span><span class="line"><span class="cl">- newpage/
+</span></span><span class="line"><span class="cl">  - style.css
+</span></span><span class="line"><span class="cl">  - index.html
+</span></span><span class="line"><span class="cl">  - script.js
+</span></span><span class="line"><span class="cl">- background.js
+</span></span><span class="line"><span class="cl">- manifest.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如上所展示的，扩展的主要文件由四个文件构成，<code>manifest.json、background.js、index.html、script.js</code>,其中<code>background.js</code>并不是必要的。</p>
+<h3 id="21manifest文件">2.1、manifest文件</h3>
+<p>manifest文件主要用于声明扩展的作者版本号等信息，除开一些无关紧要的信息，manifest还声明了重要的安全隐私相关的权限信息，比如跨域访问、允许访问的域名、闹钟事件等，本次开发使用到的热搜显示模块就使用到了以上三个功能，这里说明一下。至于index.html，是扩展的图形化操作界面，有一些扩展再点击后会弹出一个小窗口，这个小窗口也是使用html编写的，一般叫popup.html。本项目只需要本地编写一个页面然后重定向为主页即可。此外，浏览器的CORS禁止当前网页的脚本跨域访问，但是如果实现在manifest文件里面声明需要访问的网站就可以轻松跨域，这算是扩展的优势，因为普通的脚本即使临时禁用CORS也能fetch，但是无法读取获得的内容。顺带一提，比起python爬虫获取json文件，js脚本的运行速度要快上不少，个人认为可能是浏览器的环境在浏览器启动后就做好了，但是python脚本却需要先启用雨滴桌面，然后桌面唤起vbs脚本，然后vbs脚本建立终端窗口，在终端窗口在建立python环境，这个流程之长确实会影响爬虫的效率，更何况python这种语言也不是什么高效率的语言，在python脚本里面还要import对应的库，确实不如直接js脚本的fetch方法来的快。</p>
+<p>此外，为了避免fetch时把自己的cookie等信息一块发出去，在fetch使用以下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fetch(&#39;https://example.com/data&#39;, {
+</span></span><span class="line"><span class="cl">  method: &#39;GET&#39;,
+</span></span><span class="line"><span class="cl">  credentials: &#39;omit&#39;  // 不发送 cookies 和 HTTP 认证信息
+</span></span><span class="line"><span class="cl">})
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="22html文件及对应的js脚本">2.2、html文件及对应的js脚本</h3>
+<p>关于前端的基础知识这里没办法完整且详尽地记录，这里只写几个遇到的问题，问题基本都是因为js脚本是运行在浏览器扩展的环境下面，所以寻常网页脚本可以做的事在这里并不能完全自如的做出来，比如爬虫遇到gbk编码返回的信息，js脚本就无法安装库来解析，或者说搞起来很麻烦。（至少目前我还没整明白，我看别人都是扔到后端去做，但是一个完全本地运行的扩展如果为了解析gbk字符串就要用后端的话属实违背我的本意了）</p>
+<p>还有就是在爬虫的使用上，我是想使用background脚本先获取内容，解析为json之后存在浏览器的存储里面（最大大小支持5M，在本项目的使用场景里面足够了），遇到的问题是，js脚本无法再浏览器环境下使用dompraser</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.52pojie.cn/forum.php?mod=guide&amp;view=hot&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">async</span> <span class="n">function</span> <span class="n">fetchData</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">text</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">解析</span><span class="n">HTML</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">new</span> <span class="n">DOMParser</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parseFromString</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">提取数据</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">items</span> <span class="o">=</span> <span class="ne">Array</span><span class="o">.</span><span class="n">from</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;.commonbox .subject&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">element</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="n">title</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">querySelector</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="err">?</span><span class="o">.</span><span class="n">textContent</span><span class="o">.</span><span class="n">trim</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="n">summary</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">querySelector</span><span class="p">(</span><span class="s1">&#39;.excerpt&#39;</span><span class="p">)</span><span class="err">?</span><span class="o">.</span><span class="n">textContent</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span> <span class="o">||</span> <span class="s1">&#39;No summary available&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="p">{</span> <span class="n">title</span><span class="p">,</span> <span class="n">summary</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">保存到本地存储</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chrome</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">set</span><span class="p">({</span> <span class="n">data</span><span class="p">:</span> <span class="n">items</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">console</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error fetching data:&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">每天更新一次数据</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">updateInterval</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">//</span> <span class="mi">24</span><span class="err">小时</span>
+</span></span><span class="line"><span class="cl"><span class="n">fetchData</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">setInterval</span><span class="p">(</span><span class="n">fetchData</span><span class="p">,</span> <span class="n">updateInterval</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以不得不采用字符串匹配的方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.52pojie.cn/forum.php?mod=guide&amp;view=hot&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">async</span> <span class="n">function</span> <span class="n">fetchData</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">text</span> <span class="o">=</span> <span class="n">await</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">使用正则表达式解析数据</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">regex</span> <span class="o">=</span> <span class="o">/&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&#34;.*?&#34;</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;s xst&#34;</span><span class="o">&gt;</span><span class="p">(</span><span class="o">.*</span><span class="err">?</span><span class="p">)</span><span class="o">&lt;</span>\<span class="o">/</span><span class="n">a</span><span class="o">&gt;.*</span><span class="err">?</span><span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;excerpt&#34;</span><span class="o">&gt;</span><span class="p">(</span><span class="o">.*</span><span class="err">?</span><span class="p">)</span><span class="o">&lt;</span>\<span class="o">/</span><span class="n">div</span><span class="o">&gt;/</span><span class="n">gs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">let</span> <span class="n">match</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">((</span><span class="n">match</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="n">text</span><span class="p">))</span> <span class="o">!==</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="n">title</span> <span class="o">=</span> <span class="n">match</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">trim</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="n">summary</span> <span class="o">=</span> <span class="n">match</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">trim</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="n">items</span><span class="o">.</span><span class="n">push</span><span class="p">({</span> <span class="n">title</span><span class="p">,</span> <span class="n">summary</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">保存到本地存储</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chrome</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">local</span><span class="o">.</span><span class="n">set</span><span class="p">({</span> <span class="n">data</span><span class="p">:</span> <span class="n">items</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">console</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error fetching data:&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">每天更新一次数据</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">updateInterval</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">//</span> <span class="mi">24</span><span class="err">小时</span>
+</span></span><span class="line"><span class="cl"><span class="n">fetchData</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">setInterval</span><span class="p">(</span><span class="n">fetchData</span><span class="p">,</span> <span class="n">updateInterval</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="23扩展的更新逻辑">2.3、扩展的更新逻辑</h3>
+<p>扩展所有的图标、壁纸全都存在本地，毫无疑问可以加快反应速度，在断网的状态也能保持优雅，但是对应断网状态下，热搜的刷新逻辑就成了问题，具体来说，有两个问题，</p>
+<p>1、定时刷新的话，错过闹钟时间的话是不是就不刷新了？</p>
+<p>2、在断网状态下扩展在后台疯狂请求刷新怎么办？</p>
+<p>问题1的解法是使用chrome的alarm，只要在manifest声明该权限后就可以设置闹钟，平时background脚本沉睡，等到时间就会起来干活，如果错过闹钟，那么下次启动的时候就会自动执行</p>
+<p>问题2的解法是加入刷新按键，html通过按键触发网页的js脚本，网页js脚本会在后台与background脚本通信进而触发刷新</p>
+<p>目前的问题在于如果刚打开浏览器的时候没网，过一会网络连上了，那么就要手动刷新了，这是比较麻烦的，但是相应的，这个脚本基本每天只会执行一次，具有极高的效率，相比网上其他人做的脚本可以说更适合本人使用了。</p>
+<p>最后，展示一下成品
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://pic.imgdb.cn/item/66d07081d9c307b7e930f5a4.png"
+        data-srcset="https://pic.imgdb.cn/item/66d07081d9c307b7e930f5a4.png, https://pic.imgdb.cn/item/66d07081d9c307b7e930f5a4.png 1.5x, https://pic.imgdb.cn/item/66d07081d9c307b7e930f5a4.png 2x"
+        data-sizes="auto"
+        alt="https://pic.imgdb.cn/item/66d07081d9c307b7e930f5a4.png"
+        title="成品界面" /></p>
+<h2 id="3之后的发展方向">3、之后的发展方向</h2>
+<p>1、界面美化</p>
+<p>目前的界面还是太丑了，最丑的就是搜索栏、左一块右一块，跟edge浏览器的新界面一样丑，两个泡泡连着，就像烫破的伤口</p>
+<p>2、加入更多的订阅源</p>
+<p>52破解的gbk编码太奇葩了，对于不支持gbk处理的扩展js脚本简直天克，之后看看有没有别的中转源进行爬虫。实在不行看有没有别的替代源也行。不过我不觉得我有太多精力在满足需求后还继续完善下去也就是了。</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-08-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/my-forth-post/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/posts/my-forth-post/" data-title="edge扩展开发记录" data-hashtags="笔记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/posts/my-forth-post/" data-hashtag="笔记"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/my-forth-post/" data-title="edge扩展开发记录"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://example.org/posts/my-forth-post/" data-title="edge扩展开发记录"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/posts/my-forth-post/" data-title="edge扩展开发记录" data-image="https://pic.imgdb.cn/item/66d05e40d9c307b7e919466f.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/my-third-post/" class="prev" rel="prev" title="Git与Hugo学习笔记"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Git与Hugo学习笔记</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.133.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/dengyunzhe/" target="_blank">Dengyunzhe</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
