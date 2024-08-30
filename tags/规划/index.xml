@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>规划 - 标签 - Dengyunzhe&#39;s Site</title>
-        <link>https://dengyunzhe.github.io/tags/%E8%A7%84%E5%88%92/</link>
+        <link>http://localhost:1313/tags/%E8%A7%84%E5%88%92/</link>
         <description>规划 - 标签 - Dengyunzhe&#39;s Site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>dengyunzhe233@outlook.com (Dengyunzhe)</managingEditor>
-            <webMaster>dengyunzhe233@outlook.com (Dengyunzhe)</webMaster><lastBuildDate>Sat, 24 Aug 2024 19:47:01 &#43;0800</lastBuildDate><atom:link href="https://dengyunzhe.github.io/tags/%E8%A7%84%E5%88%92/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>dengyunzhe233@outlook.com (Dengyunzhe)</webMaster><lastBuildDate>Sat, 24 Aug 2024 19:47:01 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A7%84%E5%88%92/" rel="self" type="application/rss+xml" /><item>
     <title>本博客今后的整体规划</title>
-    <link>https://dengyunzhe.github.io/posts/my-second-post/</link>
+    <link>http://localhost:1313/posts/my-second-post/</link>
     <pubDate>Sat, 24 Aug 2024 19:47:01 &#43;0800</pubDate>
     <author>Dengyunzhe</author>
-    <guid>https://dengyunzhe.github.io/posts/my-second-post/</guid>
+    <guid>http://localhost:1313/posts/my-second-post/</guid>
     <description><![CDATA[<p>本文主要讨论这个博客今后会写些什么东西。</p>]]></description>
 </item>
 </channel>

@@ -1,25 +1,35 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>笔记 - 标签 - Dengyunzhe&#39;s Site</title>
-        <link>https://dengyunzhe.github.io/tags/%E7%AC%94%E8%AE%B0/</link>
+        <link>http://localhost:1313/tags/%E7%AC%94%E8%AE%B0/</link>
         <description>笔记 - 标签 - Dengyunzhe&#39;s Site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>dengyunzhe233@outlook.com (Dengyunzhe)</managingEditor>
-            <webMaster>dengyunzhe233@outlook.com (Dengyunzhe)</webMaster><lastBuildDate>Thu, 29 Aug 2024 18:57:01 &#43;0800</lastBuildDate><atom:link href="https://dengyunzhe.github.io/tags/%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>dengyunzhe233@outlook.com (Dengyunzhe)</webMaster><lastBuildDate>Thu, 29 Aug 2024 18:57:01 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
     <title>edge扩展开发记录</title>
-    <link>https://dengyunzhe.github.io/posts/my-forth-post/</link>
+    <link>http://localhost:1313/posts/my-forth-post/</link>
     <pubDate>Thu, 29 Aug 2024 18:57:01 &#43;0800</pubDate>
     <author>Dengyunzhe</author>
-    <guid>https://dengyunzhe.github.io/posts/my-forth-post/</guid>
+    <guid>http://localhost:1313/posts/my-forth-post/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://pic.imgdb.cn/item/66d05e40d9c307b7e919466f.png" referrerpolicy="no-referrer">
             </div><p>本文介绍了个人制作edge浏览器扩展&quot;my new tab&quot;的过程，主要讲述edge浏览器扩展开发的基本逻辑。</p>]]></description>
 </item>
 <item>
+    <title>git学习笔记</title>
+    <link>http://localhost:1313/posts/my-firth-post/</link>
+    <pubDate>Thu, 29 Aug 2024 18:57:01 &#43;0800</pubDate>
+    <author>Dengyunzhe</author>
+    <guid>http://localhost:1313/posts/my-firth-post/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://pic.imgdb.cn/item/66d1b1b4d9c307b7e9c5c3a2.png" referrerpolicy="no-referrer">
+            </div><p>本文进一步介绍了git在本地进行项目版本管理的使用逻辑。</p>]]></description>
+</item>
+<item>
     <title>Git与Hugo学习笔记</title>
-    <link>https://dengyunzhe.github.io/posts/my-third-post/</link>
+    <link>http://localhost:1313/posts/my-third-post/</link>
     <pubDate>Sat, 24 Aug 2024 19:57:01 &#43;0800</pubDate>
     <author>Dengyunzhe</author>
-    <guid>https://dengyunzhe.github.io/posts/my-third-post/</guid>
+    <guid>http://localhost:1313/posts/my-third-post/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://pic.imgdb.cn/item/66c9cb24d9c307b7e9591480.jpg" referrerpolicy="no-referrer">
             </div><!-- ![mywife](https://pic.imgdb.cn/item/66c9cb24d9c307b7e9591480.jpg) -->
